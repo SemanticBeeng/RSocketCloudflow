@@ -46,47 +46,30 @@ lazy val client = sbtdockerAppBase("client")("./client")
   .dependsOn(support)
 
 lazy val interactions = (project in file("./interactions"))
-  .settings(libraryDependencies ++= Seq(rsocketCore, rsocketTransport, rsocketBalancer, slf4, logback),
-    dependencyOverrides += "io.netty" % "netty-buffer" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-codec" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-codec-http" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-common" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-handler" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-resolver" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-transport" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-transport-native-epoll" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-transport-native-unix-common" % "4.1.49.Final"
-  )
+  .settings(libraryDependencies ++= Seq(rsocketCore, rsocketTransport, rsocketBalancer, slf4, logback) ++ nettyLibs)
 
 lazy val transports = (project in file("./transports"))
-  .settings(libraryDependencies ++= Seq(rsocketCore, rsocketTransport, rsocketLocal, argona, reactorKafka, kafka, curator, commonIO, slf4, logback),
-    dependencyOverrides += "io.netty" % "netty-buffer" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-codec" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-codec-http" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-common" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-handler" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-resolver" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-transport" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-transport-native-epoll" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-transport-native-unix-common" % "4.1.49.Final",
-    dependencyOverrides += "org.apache.kafka" % "kafka-clients" % "2.4.0"
+  .settings(libraryDependencies ++= Seq(rsocketCore, rsocketTransport, rsocketLocal, argona, reactorKafka, kafka, curator, commonIO, slf4, logback) ++ nettyLibs,
+        dependencyOverrides += "org.apache.kafka" % "kafka-clients" % "2.4.0"
   )
 
 lazy val support = (project in file("./support"))
   .enablePlugins(CloudflowLibraryPlugin)
   .settings(
-    libraryDependencies ++= Seq(rsocketCore, rsocketTransport, akkastream, typesafeConfig, ficus, slf4, logback, scalaTest),
-    dependencyOverrides += "io.netty" % "netty-buffer" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-codec" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-codec-http" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-common" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-handler" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-resolver" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-transport" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-transport-native-epoll" % "4.1.49.Final",
-    dependencyOverrides += "io.netty" % "netty-transport-native-unix-common" % "4.1.49.Final"
+    libraryDependencies ++= Seq(rsocketCore, rsocketTransport, akkastream, typesafeConfig, ficus, slf4, logback, scalaTest) ++ nettyLibs
   )
   .settings(commonSettings)
+
+val nettyLibs = Seq("io.netty" % "netty-buffer",
+  "io.netty" % "netty-codec",
+  "io.netty" % "netty-codec-http",
+  "io.netty" % "netty-common",
+  "io.netty" % "netty-handler",
+  "io.netty" % "netty-resolver",
+  "io.netty" % "netty-transport",
+  "io.netty" % "netty-transport-native-epoll",
+  "io.netty" % "netty-transport-native-unix-common"
+  ).map(_  % Versions.netty)
 
 lazy val sensorData = (project in file("./sensordata"))
   .enablePlugins(CloudflowApplicationPlugin, CloudflowAkkaPlugin)
@@ -127,8 +110,8 @@ lazy val scalacSrcCompileOptions = scalacTestCompileOptions ++ Seq(
   "-Ywarn-value-discard")
 
 lazy val commonSettings = Seq(
-  scalacOptions in Compile := scalacSrcCompileOptions,
-  scalacOptions in Test := scalacTestCompileOptions,
+  Compile / scalacOptions := scalacSrcCompileOptions,
+  Test / scalacOptions := scalacTestCompileOptions,
   scalacOptions in (Compile, console) := commonScalacOptions,
   scalacOptions in (Test, console) := commonScalacOptions,
 

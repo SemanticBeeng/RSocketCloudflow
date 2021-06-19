@@ -22,17 +22,19 @@ object Versions {
 
   val argonaVersion         = "0.9.1"
 
-  val reactorKafkaVersion   = "1.2.2.RELEASE"
-  val kafkaVersion          = "2.4.0"
+  val reactorKafkaVersion   = "1.3.4"
+  val kafkaVersion          = "2.7.0"
   val curatorVersion        = "4.3.0"
   val commonIOVersion       = "1.3.2"
 
   val chronicleVersion      = "5.19.32"
 
-  val akkaVersion           = "2.5.29"
+  val akkaVersion           = "2.6.13"
 
-  val TypesafeConfigVersion = "1.3.3"
+  val TypesafeConfigVersion = "1.4.1"
   val FicusVersion          = "1.4.5"
 
-  val scaltestVersion       = "3.0.5"
+  val netty = "4.1.49.Final"
+
+  val scaltestVersion       = "3.2.9"
 }

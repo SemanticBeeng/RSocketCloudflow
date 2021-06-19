@@ -1,6 +1,6 @@
 package com.lightbend.rsocket.dataconversion
 
-import cloudflow.streamlets.DecodeException
+//import cloudflow.streamlets.DecodeException
 import com.twitter.bijection.Injection
 import org.apache.avro.specific.SpecificRecordBase
 
@@ -13,6 +13,6 @@ class AvroSerde[T <: SpecificRecordBase](injection: Injection[T, Array[Byte]]) e
 
   def decode(bytes: Array[Byte]): T = Try(inverted(bytes).get).recoverWith {
     case t ⇒
-      Failure(DecodeException("Could not decode.", t))
+      Failure(new Exception("Could not decode.", t)) //#todo DecodeException
   }.get
 }
