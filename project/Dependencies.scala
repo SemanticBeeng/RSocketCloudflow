@@ -22,7 +22,15 @@ object Dependencies {
 
   val marshallers           = "com.typesafe.akka"   %% "akka-http-spray-json"             % marshallersVersion
 
-  val akkastream            = "com.typesafe.akka"   %% "akka-stream"                      % akkaVersion
+  val akkastreamLibs            = Seq(
+    "com.typesafe.akka" %% "akka-stream",
+    "com.typesafe.akka" %% "akka-protobuf",
+    "com.typesafe.akka" %% "akka-protobuf-v3"
+    ).map(_ % akkaVersion)
+
+  val akkaGRPCLibs = Seq(
+    "com.lightbend.akka.grpc" %% "akka-grpc-runtime" % "2.1.0"
+  )
 
   val typesafeConfig        = "com.typesafe"        %  "config"                           % TypesafeConfigVersion
   val ficus                 = "com.iheart"          %% "ficus"                            % FicusVersion

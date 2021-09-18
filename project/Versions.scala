@@ -15,19 +15,19 @@
 
 object Versions {
 
-  val RSocketVersion        = "1.0.3"
+  val RSocketVersion        = "1.1.1"
   val SLFVersion            = "1.7.25"
   val LogBackVersion        = "1.2.3"
-  val marshallersVersion    = "10.1.11"
+  val marshallersVersion    = "10.2.6"
 
   val argonaVersion         = "0.9.1"
 
-  val reactorKafkaVersion   = "1.3.4"
-  val kafkaVersion          = "2.7.0"
+  val reactorKafkaVersion   = "1.3.6"
+  val kafkaVersion          = "2.8.0"
   val curatorVersion        = "4.3.0"
   val commonIOVersion       = "1.3.2"
 
-  val chronicleVersion      = "5.19.32"
+  val chronicleVersion      = "5.22ea2"
 
   val akkaVersion           = "2.6.13"
 

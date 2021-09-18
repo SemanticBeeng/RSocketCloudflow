@@ -8,7 +8,7 @@ name := "RSocket"
 lazy val thisVersion = "0.1"
 organization in ThisBuild := "lightbend"
 version in ThisBuild := thisVersion
-scalaVersion in ThisBuild := "2.12.10"
+scalaVersion in ThisBuild := "2.12.13"
 
 //resolvers += "Frog OSS Snapshots" at "https://oss.jfrog.org/oss-snapshot-local"
 
@@ -56,7 +56,8 @@ lazy val transports = (project in file("./transports"))
 lazy val support = (project in file("./support"))
   .enablePlugins(CloudflowLibraryPlugin)
   .settings(
-    libraryDependencies ++= Seq(rsocketCore, rsocketTransport, akkastream, typesafeConfig, ficus, slf4, logback, scalaTest) ++ nettyLibs
+    libraryDependencies ++= Seq(rsocketCore, rsocketTransport, typesafeConfig, ficus, slf4, logback, scalaTest) ++ akkastreamLibs ++ nettyLibs,
+    dependencyOverrides ++= akkaGRPCLibs
   )
   .settings(commonSettings)
 
@@ -114,6 +115,7 @@ lazy val commonSettings = Seq(
   Test / scalacOptions := scalacTestCompileOptions,
   scalacOptions in (Compile, console) := commonScalacOptions,
   scalacOptions in (Test, console) := commonScalacOptions,
+  evictionErrorLevel := Level.Info,
 
   scalariformPreferences := scalariformPreferences.value
     .setPreference(AlignParameters, true)

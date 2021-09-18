@@ -35,3 +35,9 @@ checkpoint
 output
 .metals/
 .bloop/
+
+.bsp/
+project/.boot/
+project/.ivy/
+project/.sbtboot/
+
