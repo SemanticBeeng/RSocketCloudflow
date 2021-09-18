@@ -2,12 +2,9 @@ package com.lightbend.rsocket.transport.kafka;
 
 import io.netty.buffer.ByteBufAllocator;
 import io.rsocket.DuplexConnection;
-import io.rsocket.fragmentation.FragmentationDuplexConnection;
-import io.rsocket.fragmentation.ReassemblyDuplexConnection;
 import io.rsocket.transport.ClientTransport;
 import io.rsocket.transport.ServerTransport;
 import reactor.core.publisher.Mono;
-import reactor.core.publisher.MonoProcessor;
 
 import java.util.Objects;
 

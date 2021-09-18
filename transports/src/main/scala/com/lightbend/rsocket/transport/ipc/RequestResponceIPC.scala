@@ -22,11 +22,11 @@ object RequestResponceIPC {
     val eventLoopGroup = Schedulers.newParallel("shm-event-loop")
 
     // Server
-    RSocketServer.create(SocketAcceptor.forRequestResponse((payload: Payload) => {
+    RSocketServer.create(SocketAcceptor.forRequestResponse((payload: Payload) ⇒ {
       // Log request
       logger.info(s"Received 'request with payload: [${payload.getDataUtf8}] ")
       Mono.just(DefaultPayload.create("Echo:" + payload.getDataUtf8()))
-        .doFinally(_ => payload.release())
+        .doFinally(_ ⇒ payload.release())
     }))
       // Enable Zero Copy
       .payloadDecoder(PayloadDecoder.ZERO_COPY)
@@ -42,9 +42,9 @@ object RequestResponceIPC {
 
     val n = 5
     val start = System.currentTimeMillis()
-    1 to n foreach { i =>
+    1 to n foreach { i ⇒
       socket.requestResponse(DefaultPayload.create(s"new request $i"))
-        .map((payload: Payload) => {
+        .map((payload: Payload) ⇒ {
           logger.info(s"Received 'response with payload: [${payload.getDataUtf8}] ")
           payload.release()
           payload

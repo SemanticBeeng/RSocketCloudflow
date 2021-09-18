@@ -17,7 +17,7 @@ object FireAndForgetKafka {
     val kafka = new KafkaEmbedded
 
     // Create server
-    val server = RSocketServer.create(SocketAcceptor.forFireAndForget((payload: Payload) => {
+    val server = RSocketServer.create(SocketAcceptor.forFireAndForget((payload: Payload) ⇒ {
       // Log message
       println(s"Received 'fire-and-forget' request with payload: [${payload.getDataUtf8}]")
       Mono.empty()
@@ -32,7 +32,7 @@ object FireAndForgetKafka {
 
     // Send some messages
     val n = 20
-    1 to n foreach { i =>
+    1 to n foreach { i ⇒
       client.fireAndForget(ByteBufPayload.create("message " + i)).block
       Thread.sleep(100);
     }

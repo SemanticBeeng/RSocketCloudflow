@@ -15,7 +15,7 @@ object RequestResponceWS {
   def main(args: Array[String]): Unit = {
 
     // Server
-    RSocketServer.create(SocketAcceptor.forRequestResponse((payload: Payload) => {
+    RSocketServer.create(SocketAcceptor.forRequestResponse((payload: Payload) ⇒ {
       // Just return payload back
       Mono.just(payload)
     }))
@@ -33,9 +33,9 @@ object RequestResponceWS {
     val n = 10000
     val data = repeatChar('x', length).getBytes()
     val start = System.currentTimeMillis()
-    1 to n foreach { _ =>
+    1 to n foreach { _ ⇒
       socket.requestResponse(DefaultPayload.create(data))
-        .map((payload: Payload) => {
+        .map((payload: Payload) ⇒ {
           //          println(s"Got reply ${payload.getDataUtf8}")
           payload.release()
           payload

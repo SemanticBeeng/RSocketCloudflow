@@ -18,11 +18,11 @@ object StreamingClientKafka {
     val kafka = new KafkaEmbedded
 
     // Create a server
-    RSocketServer.create(SocketAcceptor.forRequestStream((payload: Payload) => {
+    RSocketServer.create(SocketAcceptor.forRequestStream((payload: Payload) ⇒ {
       // Log request
       println(s"Server Received request stream request with payload: [${payload.getDataUtf8}] ")
       // return stream
-      Flux.generate[Payload, Int](() => 0, (state: Int, sink: SynchronousSink[Payload]) => {
+      Flux.generate[Payload, Int](() ⇒ 0, (state: Int, sink: SynchronousSink[Payload]) ⇒ {
         Thread.sleep(100)
         sink.next(DefaultPayload.create("Interval: " + state))
         state + 1

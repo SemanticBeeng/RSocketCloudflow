@@ -43,6 +43,7 @@ lazy val client = sbtdockerAppBase("client")("./client")
     mainClass in Compile := Some("com.lightbend.sensordata.producer.rsocket.ProducerRunner"),
     libraryDependencies ++= Seq(rsocketBalancer)
 )
+  .settings(commonSettings)
   .dependsOn(support)
 
 lazy val interactions = (project in file("./interactions"))
@@ -52,6 +53,7 @@ lazy val transports = (project in file("./transports"))
   .settings(libraryDependencies ++= Seq(rsocketCore, rsocketTransport, rsocketLocal, argona, reactorKafka, kafka, curator, commonIO, slf4, logback) ++ nettyLibs,
         dependencyOverrides += "org.apache.kafka" % "kafka-clients" % "2.4.0"
   )
+  .settings(commonSettings)
 
 lazy val support = (project in file("./support"))
   .enablePlugins(CloudflowLibraryPlugin)

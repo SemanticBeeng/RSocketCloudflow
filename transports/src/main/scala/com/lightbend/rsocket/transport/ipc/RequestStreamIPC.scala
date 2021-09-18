@@ -19,19 +19,19 @@ object RequestStreamIPC {
   def main(args: Array[String]): Unit = {
 
     // Ensure clean disposal
-    Hooks.onErrorDropped((t: Throwable) => {})
+    Hooks.onErrorDropped((t: Throwable) ⇒ {})
 
     // Scheduler
     val eventLoopGroup = Schedulers.newParallel("shm-event-loop")
 
     // Server
-    RSocketServer.create(SocketAcceptor.forRequestStream((payload: Payload) => {
+    RSocketServer.create(SocketAcceptor.forRequestStream((payload: Payload) ⇒ {
       // Log request
       logger.info(s"Received 'request stream' request with payload: [${payload.getDataUtf8}] ")
       payload.release()
       // return stream
       Flux.interval(Duration.ofMillis(500))
-        .map(t => ByteBufPayload.create(t.toString()))
+        .map(t ⇒ ByteBufPayload.create(t.toString()))
     }))
       // Enable Zero Copy
       .payloadDecoder(PayloadDecoder.ZERO_COPY)
@@ -48,7 +48,7 @@ object RequestStreamIPC {
     // Send messages
     socket
       .requestStream(ByteBufPayload.create("Hello"))
-      .subscribe((value: Payload) => logger.info(s"New stream element ${value.getDataUtf8}"))
+      .subscribe((value: Payload) ⇒ logger.info(s"New stream element ${value.getDataUtf8}"))
 
     // Wait for completion
     Thread.sleep(10000)

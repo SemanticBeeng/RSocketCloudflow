@@ -2,8 +2,6 @@ package com.lightbend.rsocket.transport.kafka;
 
 import io.netty.buffer.ByteBufAllocator;
 import io.rsocket.Closeable;
-import io.rsocket.fragmentation.FragmentationDuplexConnection;
-import io.rsocket.fragmentation.ReassemblyDuplexConnection;
 import io.rsocket.transport.ClientTransport;
 import io.rsocket.transport.ServerTransport;
 import org.reactivestreams.Subscription;

@@ -20,5 +20,8 @@
  * The sbt plugin expects you to have logged in to the specified registry using
  * the `docker login` command.
  */
-ThisBuild / cloudflowDockerRegistry := Some("docker.io")
-ThisBuild / cloudflowDockerRepository := Some("lightbend")
+//ThisBuild / cloudflowDockerRegistry := Some("docker.io")
+//ThisBuild / cloudflowDockerRepository := Some("lightbend")
+
+ThisBuild / cloudflowDockerRegistry := Some("acrsparksdp.azurecr.io")
+ThisBuild / cloudflowDockerRepository := Some("sdp-data-lakehouse-collection-app")

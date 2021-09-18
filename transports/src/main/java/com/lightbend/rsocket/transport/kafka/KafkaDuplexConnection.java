@@ -5,6 +5,7 @@ import static io.netty.buffer.Unpooled.*;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.util.CharsetUtil;
 import io.rsocket.DuplexConnection;
+import io.rsocket.RSocketErrorException;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -22,6 +23,7 @@ import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderOptions;
 import reactor.kafka.sender.SenderRecord;
 
+import java.net.SocketAddress;
 import java.time.Duration;
 import java.util.*;
 
@@ -78,10 +80,20 @@ final class KafkaDuplexConnection implements DuplexConnection {
     }
   }
 
+//  @Override
+//  public Mono<Void> send(Publisher<ByteBuf> frames) { //#todo
+//    return producer.send(frames)
+//            .then();
+//  }
+
   @Override
-  public Mono<Void> send(Publisher<ByteBuf> frames) {
-    return producer.send(frames)
-            .then();
+  public void sendFrame(int streamId, ByteBuf frame) {
+      //#todo return producer.send(frame);
+  }
+
+  @Override
+  public void sendErrorAndClose(RSocketErrorException errorException) {
+      //#todo
   }
 
   @Override
@@ -94,7 +106,12 @@ final class KafkaDuplexConnection implements DuplexConnection {
     return allocator;
   }
 
-  @Override
+    @Override
+    public SocketAddress remoteAddress() {
+        return null;
+    }
+
+    @Override
   public Mono<Void> onClose() {
     return onClose;
   }
@@ -105,7 +122,7 @@ final class KafkaDuplexConnection implements DuplexConnection {
     onClose.onComplete();
   }
 
-  private static class KafkaProducer{
+    private static class KafkaProducer{
 
     private static final Logger log = LoggerFactory.getLogger(KafkaProducer.class.getName());
     private final KafkaSender<byte[], byte[]> sender;
