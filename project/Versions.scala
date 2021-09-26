@@ -22,14 +22,15 @@ object Versions {
 
   val argonaVersion         = "0.9.1"
 
-  val reactorKafkaVersion   = "1.3.6" //"1.2.2.RELEASE"
+  val reactorCore           = "3.4.10"
+  val reactorKafka          = "1.3.6" //"1.2.2.RELEASE"
   val kafkaVersion          = "2.4.0" // 2.8.0" needs KafkaEmbedded
   val curatorVersion        = "4.3.0"
   val commonIOVersion       = "1.3.2"
 
   val chronicleVersion      = "5.22ea2"
 
-  val akkaVersion           = "2.6.15"
+  val akkaVersion           = "2.6.13"
 
   val TypesafeConfigVersion = "1.4.1"
   val FicusVersion          = "1.4.5"

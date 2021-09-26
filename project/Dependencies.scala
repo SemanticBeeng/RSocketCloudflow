@@ -10,7 +10,8 @@ object Dependencies {
 
   val argona                = "org.agrona"          % "Agrona"                            % argonaVersion
 
-  val reactorKafka          = "io.projectreactor.kafka" % "reactor-kafka"                 % reactorKafkaVersion
+  val reactorCore           = "io.projectreactor"   % "reactor-core"                      % Versions.reactorCore
+  val reactorKafka          = "io.projectreactor.kafka" % "reactor-kafka"                 % Versions.reactorKafka
   val kafka                 = "org.apache.kafka"    %% "kafka"                            % kafkaVersion
   val curator               = "org.apache.curator"  % "curator-test"                      % curatorVersion
   val commonIO              = "commons-io"          % "commons-io"                        % commonIOVersion

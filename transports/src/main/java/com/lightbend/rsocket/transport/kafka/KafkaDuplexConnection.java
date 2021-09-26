@@ -88,7 +88,7 @@ final class KafkaDuplexConnection implements DuplexConnection {
 
   @Override
   public void sendFrame(int streamId, ByteBuf frame) {
-      //#todo return producer.send(frame);
+      //#todo return producer.send(Flux.from(frame));
   }
 
   @Override
