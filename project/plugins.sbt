@@ -7,7 +7,5 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.8.0")
 addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.8.2")
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.9.2")
 
-
-
-addSbtPlugin("org.scalariform"  %  "sbt-scalariform" % "1.8.2")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.4.3")
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.10.0-RC1")

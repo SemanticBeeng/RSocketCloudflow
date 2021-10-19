@@ -1,7 +1,7 @@
 import sbt._
 import sbt.Keys._
 import Dependencies._
-import scalariform.formatter.preferences._
+//import scalariform.formatter.preferences._
 
 name := "RSocket"
 
@@ -14,7 +14,7 @@ scalaVersion in ThisBuild := "2.12.13"
 
 // settings for a native-packager based docker project based on sbt-docker plugin
 def sbtdockerAppBase(id: String)(base: String = id): Project = Project(id, base = file(base))
-  .enablePlugins(sbtdocker.DockerPlugin, JavaAppPackaging)
+  .enablePlugins(sbtdocker.DockerPlugin, JavaAppPackaging, ScalafmtPlugin)
   .settings(
     dockerfile in docker := {
       val appDir = stage.value
@@ -35,7 +35,8 @@ def sbtdockerAppBase(id: String)(base: String = id): Project = Project(id, base 
         tag = Some(version.value))
     ),
 
-    buildOptions in docker := BuildOptions(cache = false)
+    buildOptions in docker := BuildOptions(cache = false),
+    scalafmtOnCompile := true
   )
 
 lazy val client = sbtdockerAppBase("client")("./client")
@@ -119,17 +120,17 @@ lazy val commonSettings = Seq(
   scalacOptions in (Test, console) := commonScalacOptions,
   evictionErrorLevel := Level.Info,
 
-  scalariformPreferences := scalariformPreferences.value
-    .setPreference(AlignParameters, true)
-    .setPreference(AlignSingleLineCaseStatements, true)
-    .setPreference(AlignSingleLineCaseStatements.MaxArrowIndent, 90)
-    .setPreference(DoubleIndentConstructorArguments, true)
-    .setPreference(DoubleIndentMethodDeclaration, true)
-    .setPreference(IndentLocalDefs, true)
-    .setPreference(IndentPackageBlocks, true)
-    .setPreference(RewriteArrowSymbols, true)
-    .setPreference(DanglingCloseParenthesis, Preserve)
-    .setPreference(NewlineAtEndOfFile, true)
-    .setPreference(AllowParamGroupsOnNewlines, true)
-    .setPreference(SpacesWithinPatternBinders, false) // otherwise case head +: tail@_ fails to compile!
+//  scalariformPreferences := scalariformPreferences.value
+//    .setPreference(AlignParameters, true)
+//    .setPreference(AlignSingleLineCaseStatements, true)
+//    .setPreference(AlignSingleLineCaseStatements.MaxArrowIndent, 90)
+//    .setPreference(DoubleIndentConstructorArguments, true)
+//    .setPreference(DoubleIndentMethodDeclaration, true)
+//    .setPreference(IndentLocalDefs, true)
+//    .setPreference(IndentPackageBlocks, true)
+//    .setPreference(RewriteArrowSymbols, true)
+//    .setPreference(DanglingCloseParenthesis, Preserve)
+//    .setPreference(NewlineAtEndOfFile, true)
+//    .setPreference(AllowParamGroupsOnNewlines, true)
+//    .setPreference(SpacesWithinPatternBinders, false) // otherwise case head +: tail@_ fails to compile!
 )

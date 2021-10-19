@@ -11,7 +11,8 @@ class UTF8FireAndForget(host: String, port: Int, interval: Long) {
   def run(): Unit = {
 
     // Create client
-    val socket = RSocketConnector.create()
+    val socket = RSocketConnector
+      .create()
       .payloadDecoder(PayloadDecoder.ZERO_COPY)
       .connect(TcpClientTransport.create(host, port))
       .block

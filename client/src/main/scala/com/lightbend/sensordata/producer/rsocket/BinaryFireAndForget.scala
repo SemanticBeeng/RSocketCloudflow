@@ -11,7 +11,8 @@ class BinaryFireAndForget(host: String, port: Int, interval: Long) {
   def run(): Unit = {
 
     // Create client
-    val socket = RSocketConnector.create()
+    val socket = RSocketConnector
+      .create()
       .payloadDecoder(PayloadDecoder.ZERO_COPY)
       .connect(WebsocketClientTransport.create(host, port))
       .block
@@ -25,7 +26,6 @@ class BinaryFireAndForget(host: String, port: Int, interval: Long) {
   }
 
   // Generate data
-  def generateData(): Array[Byte] = {
+  def generateData(): Array[Byte] =
     SensorDataConverter.toBytes(SensorDataGenerator.random())
-  }
 }
